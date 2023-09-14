@@ -1,0 +1,13 @@
+Feature: Test login /logout with valid credential at WebOrder
+
+    Scenario: Login with valid credential at WebOrder
+        Given WebOrder has been launch on Chrome
+        When user enter valid credential
+        Then All Order Page should be displayed
+
+    Scenario: Successful LogOut from WebOrder Application
+        When User click on Logout link from the All Order Page
+        Then user should be taken back to Login page
+
+
+
