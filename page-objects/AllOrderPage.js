@@ -8,7 +8,7 @@ exports.AllOrderPage = class AllOrderPage extends AbstractPage{
 
     constructor (page=Page){
         super(page)
-        this.orderLink = page.getByText('Order');
+        this.orderLink = page.locator("//a[text()='Order']");
         this.listOfAllOrderTxt = page.locator("//h2[normalize-space()='List of All Orders']");
         this.logoutLink = page.locator('#ctl00_logout');
     }

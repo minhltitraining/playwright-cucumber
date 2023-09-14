@@ -1,16 +1,29 @@
 Feature: To Test Web Order Create Order Functionality
 
-  Background: Successful Login with Valid Credentials in WebOrder application
+
+
+  Scenario Outline: Create Order with multiple positive and negative scenarios
     Given WebOrder has been launch on Chrome
     When user enter valid credential
     Then All Order Page should be displayed
-
-  Scenario Outline: Create Order with multiple positive and negative scenarios
     And User Clicks on Order link in All Order Page
-    And User enters order data from "<SheetName>" and <RowNumber> into Create Order page
-    Then User should should get proper expect result from "<SheetName>" and <RowNumber> after click Process button
+    And User enters order data from <RowNumber> into Create Order page
+    Then User should should get proper expect result from <RowNumber> after click Process button
 
     Examples: With Multiple Data
-      | SheetName | RowNumber |
-      | Sheet1    |         0 |
+      | RowNumber |
+      |         0 |
+      |         1 |
+      |         2 |
+      |         3 |
+      |         4 |
+      |         5 |
+      |         6 |
+      |         7 |
+      |         8 |
+      |         9 |
+      |        10 |
+      |        11 |
+      |        12 |
+      
 

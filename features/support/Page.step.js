@@ -17,55 +17,55 @@ When("user enter valid credential", async function () {
     homePage = new HomePage(this.page)
     homePage.enterInfo("Tester", "test");
     homePage.clickLoginBtn();
+    
 });
 
 Then("All Order Page should be displayed", async function () {
     allOrderPage = new AllOrderPage(this.page);
-    allOrderPage.assertText();
+    await allOrderPage.assertText();
+    await allOrderPage.assertTitle();
+    await allOrderPage.assertUrl();
 });
 
 When("User click on Logout link from the All Order Page", async function () {
-
     allOrderPage.logout();
 });
 
 
 Then("user should be taken back to Login page", async function () {
-
-    homePage.assertTitle();
+    await homePage.assertTitle();
 });
 
 
 When("User Clicks on Order link in All Order Page", async function () {
-    allOrderPage = new AllOrderPage(this.page);
-
     allOrderPage.goToCreateOrder();
+    createOrderPage = new CreateOrderPage(this.page)
 });
 
 
-When('User enters order data from {string} and {int} into Create Order page', async function (fileName, index) {
+When('User enters order data from {int} into Create Order page', async function (index) {
         let data = fs.readFileSync('./order.json')
         const orders = JSON.parse(data);
         const order = orders[index];
-        quantity = order.quantity;
-        c_name = order.name;
-        street = order.street;
-        city = order.city;
-        zip = order.zip;
-        card = order.card;
-        cardNr = order.cardNr;
-        expDate = order.expDate;
-        createOrderPage = new CreateOrderPage(this.page);
+        quantity = order.quantity
+        c_name = order.name
+        street = order.street
+        city = order.city
+        zip = order.zip
+        card = order.card
+        cardNr = order.cardNr
+        expDate = order.expDate
+        expResult = order.expResult
+        console.log(quantity, c_name, street, city, zip, card, cardNr, expDate,expResult)
         createOrderPage.createOrder(quantity, c_name, street, city, zip, card, cardNr, expDate);
-        createOrderPage.clickProcessBtn();
-        // createOrderPage.wait(3000);
+        
 });
 
-Then('User should should get proper expect result from {string} and {int} after click Process button', function (fileName, index) {
+Then('User should should get proper expect result from {int} after click Process button', async function (index) {
+    createOrderPage = new CreateOrderPage(this.page)
     let data = fs.readFileSync('./order.json')
     const orders = JSON.parse(data);
     const order = orders[index];
     expResult = order.expResult;
-    createOrderPage.assertResult(expResult);
-    createOrderPage.wait(3000);
+    await createOrderPage.assertResult(expResult);
 });
